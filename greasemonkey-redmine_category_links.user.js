@@ -2,34 +2,34 @@
 // @name        Redmine category links
 // @namespace   https://github.com/JanisE
 // @description Project URL: https://github.com/JanisE/greasemonkey-redmine-category_links
-// @include     *redmine.*.com/*
+// @include     /redmine.*\..{2,3}\/.*/
 // @version     1
 // @grant       none
 // ==/UserScript==
 
 function exec (fn)
 {
-    var script = document.createElement('script');
-    script.setAttribute("type", "application/javascript");
-    script.textContent = '(' + fn + ')();';
-    document.body.appendChild(script); // run the script
-    document.body.removeChild(script); // clean up
+	var script = document.createElement('script');
+	script.setAttribute("type", "application/javascript");
+	script.textContent = '(' + fn + ')();';
+	document.body.appendChild(script); // run the script
+	document.body.removeChild(script); // clean up
 }
 
-exec(function()
+exec(function ()
 {
 	var sCategory = $('.category .value').text();
-    var iCategory = false;
+	var iCategory = false;
 	$('#issue_category_id option').each(function ()
 	{
 		var jqOption = $(this);
-        if (jqOption.text() == sCategory) {
-            iCategory = jqOption.prop('value');
-        }
-    });
+		if (jqOption.text() == sCategory) {
+			iCategory = jqOption.prop('value');
+		}
+	});
 
 	if (iCategory) {
-        $('a.issues').prop('href');
+		$('a.issues').prop('href');
 		$('.category .value')
 			.empty()
 			.append(
@@ -39,4 +39,3 @@ exec(function()
 			);
 	}
 });
-
